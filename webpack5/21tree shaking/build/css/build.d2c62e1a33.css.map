@@ -1,0 +1,1 @@
+{"version":3,"file":"css/build.d2c62e1a33.css","mappings":"AAAA,UAII,qBAAsB,CADtB,WAAY,CAFZ,QAAS,CACT,SAGJ","sources":["webpack:///./src/css/index.css"],"sourcesContent":["html, body{\n    margin: 0;\n    padding: 0;\n    height: 100%;\n    background-color: pink;\n}"],"names":[],"sourceRoot":""}

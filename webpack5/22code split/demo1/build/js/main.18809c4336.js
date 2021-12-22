@@ -1,0 +1,1 @@
+!function(...o){o.reduce(((o,c)=>o+c),0)}(console.log(1,2,3,4));
