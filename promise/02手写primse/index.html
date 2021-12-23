@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./promise.js"></script>
+</head>
+<body>
+    <script>
+        // let p = new Promise((resolve, reject)=>{
+        //     setTimeout(() => {
+        //         resolve('ok')
+        //         // reject('error')
+        //     }, 1000);
+        //     // reject('error')
+        //     // throw '报错了'
+        // })
+
+        // const res = p.then(value=>{
+        //     // return 'ok'
+        //     throw 'error'
+        //     // console.log(value)
+        //     // console.log(123)
+        // }, reason=>{
+        //     // console.warn(reason)
+        //     throw 'error'
+        // })
+
+
+        // // // p.then(value=>{
+        // // //     alert(value)
+        // // // }, reason=>{
+        // // //     alert(reason)
+        // // // })
+        // console.log(res)
+
+        // let p = new Promise((resolve, reject)=>{
+        //     resolve('ok')
+        // })
+
+        // const result = p.then(value=>{
+        //     // console.log(value)
+        //     // return 'hello promise'
+        //     return new Promise((resolve, reject)=>{
+        //         // resolve('success')
+        //         // reject('oh no')
+        //         throw '错误了'
+        //     })
+        // }, reason=>{
+        //     console.log(reason)
+        // })
+
+        // console.log(result)
+
+        // let p = new Promise((resolve, reject)=>{
+        //     setTimeout(() => {
+        //         resolve('ok')
+        //     }, 1000);
+        // })
+
+        // // let res = p.catch(reason=>{
+        // //     console.warn(reason)
+        // // })
+        // // console.log(res)
+        // console.log(p)
+        // p.then()
+        // .then(value=>{
+        //     console.log(222)
+        // }).then(value=>{
+        //     console.log(333)
+        // }).catch(reason=>{
+        //     console.warn(reason)
+        // })
+
+        // const p1 = Promise.resolve('ok')
+        // const p2 = Promise.resolve(new Promise((resolve, reject)=>{
+        //     // resolve('success')
+        //     reject('error')
+        // }))
+        // const p3 = Promise.resolve(Promise.resolve('oh yeah'))
+        // console.log(p3)
+
+        // let p1 = new Promise((resolve, reject)=>{
+        //     setTimeout(() => {
+        //         resolve('ok')
+        //     }, 1000);
+        // })
+        // let p2 = Promise.resolve('success')
+        // let p3 = Promise.resolve('oh yeah')
+        // // let result = Promise.all([p1, p2, p3])
+        // let result = Promise.race([p1, p2, p3])
+
+        // console.log(result)
+
+        let p1 = new Promise((resolve, reject)=>{
+            // reject('ok')
+            // resolve('ok')
+            // throw 'fail'
+            // console.log(111)
+            setTimeout(() => {
+                resolve('ok')
+            }, 1000);
+        })
+        p1.then(value=>{
+            console.log(value)
+        }, reason=>{
+            console.log(reason)
+        })
+        console.log(333)
+
+    </script>
+</body>
+</html>

@@ -16,6 +16,9 @@
             // resolve('ok')
             reject('error')
         }))
+        p2.catch(reason=>{
+            console.log(reason)
+        })
         console.log(p2)
     </script>
 </body>
