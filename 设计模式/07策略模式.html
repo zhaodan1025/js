@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            策略模式
+                一个问题匹配多个解决方案，不一定能要用到哪一个
+                而且可能随时还会继续增加多个方案
+                例子：
+                    满100-10
+                    满200-25
+                    9折
+                    7折
+                1.把我们的多种方案，以闭包的形式保存起来
+                    对外留一个接口
+                    可以添加或减少
+                2.留下添加折扣和删除折扣的接口
+                    函数也是一个对象
+                    可以把函数名当作一个对象，向里面添加一些成员
+
+        */
+
+        const calcPrice = (function(){
+
+            const sale = {
+                '100_10': function(price){ return price-=10 },
+                '200_25': function(price){ return price-=25 },
+                '80%': function(price){ return price *= 0.8 }
+
+            }
+
+            function calcPrice(price, type){
+                if(!sale[type])return '没有这个折扣'
+                return sale[type](price)
+            }
+
+            calcPrice.add = function(type, fn){
+                if(sale[type]) return '该折扣已经存在'
+                sale[type] = fn
+                return '添加成功'
+            }
+
+            calcPrice.del = function(type){
+                delete sale[type]
+            }
+
+            return calcPrice
+
+        })()
+
+        // function calcPrice(price, type){
+        //     if(type === '100_10'){
+        //         price -= 10
+        //     }else if(type === '200_25'){
+        //         price -=25
+        //     }else if(type === '80%'){
+        //         price *= 0.8
+        //     }else{
+        //         console.log('没有这种折扣')
+        //     }
+        //     return price
+        // }
+
+        calcPrice.add('70%', function(price){return price*=0.7})
+        const res = calcPrice(320, '70%')
+        console.log(calcPrice)
+        console.log(res)
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+        单例模式
+            单： 单一，一个
+            例： 实例
+            一个构造函数一生只能有一个实例，不管new多少次，都是这一个实例
+            应用：
+                自定义弹出层
+                结构：div> xxx, 默认隐藏，在一定条件下显示
+                实现：都是一个div，每次修改里面的内容
+        单例模式的核心代码
+            let instance = null
+
+            function singleton(){
+                if(!instance) instance = 实例对象
+
+                return instance
+            }
+        问题：
+            1.书写代码的时候和构造函数已经没有关系了
+            2.new关键字没有了
+        */
+
+        function Person(){
+            this.name = 'Jack'
+        }
+
+        // const p1 = new Person()
+        // const p2 = new Person()
+
+        // console.log(p1, p2)
+        // console.log(p1 == p2) // false
+
+        // 加入单例模式核心代码
+        let instance = null
+        function singleTon(){
+            if(!instance) instance = new Personn()
+            return instance
+        }
+
+        // 再来创建，使用singleTon
+        // 当第一次调用singleTon的时候，instance是null
+        // 就要执行new Person给instance赋值，之后，instance就是一个Person的实例了
+        const p1 = singleTon()
+        // 当第二次调用singleTon时
+        // 此时instance是第一次new 出来的实例
+        // if条件就不会执行了，直接返回第一次实例的地址
+        const p2 = singleTon()
+
+        console.log(p1, p2)
+        console.log(p1 == p2) // true
+
+    </script>
+</body>
+</html>

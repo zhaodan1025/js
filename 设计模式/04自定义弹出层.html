@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tip {
+            width: 500px;
+            height: 300px;
+            border: 1px solid #333;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            background-color: #fff;
+            display: none;
+        }
+
+        .top {
+            height: 20px;
+            background-color: skyblue;
+            padding: 10px;
+        }
+
+        .top>span {
+            float: right;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: #fff;
+            font-size: 18px;
+            text-align: center;
+            line-height: 16px;
+        }
+
+        .tip>.content {
+            height: 210px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .top>.content>p {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .tip>.btns {
+            height: 40px;
+            background-color: skyblue;
+            padding: 5px 30px;
+        }
+
+        .tip>.btns>button {
+            float: right;
+            padding: 10px 40px;
+            margin-left: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tip">
+        <div class="top">标题
+            <span>X</span>
+        </div>
+        <div class="content">
+            <p>提示内容</p>
+        </div>
+        <div class="btns">
+            <button>取消</button>
+            <button>确定</button>
+        </div>
+    </div>
+    <script>
+        /*
+            自定义弹出层
+            1.书写构造函数
+            2.改造成单例模式
+                写成闭包
+                把类放在闭包里面
+                单例模式核心代码
+        */
+
+
+        // 为了实现功能的单例模式
+        const Tip = (function () {
+            // 实现功能的类
+            class Tip {
+                constructor() {
+                    // 最外层的div
+                    this.ele = document.createElement('div')
+                    this.ele.className = 'tip'
+                    document.body.appendChild(this.ele)
+                    // 添加一个属性是callback
+                    this.callback = function(){}
+                    this.bindEvent()
+                }
+                // 1.填充this.ele的内容
+                setContent(txt) {
+                    this.ele.innerHTML = `
+               <div class="top">标题
+                    <span class="close">X</span>
+                </div>
+                <div class="content">
+                    <p>${txt}</p>
+                </div>
+                <div class="btns">
+                    <button class="cancel">取消</button>
+                    <button class="ok">确定</button>
+                </div>
+               `
+                    this.ele.style.display = 'block'
+                }
+                // 2.添加各种事件
+                bindEvent() {
+                    this.ele.addEventListener('click', e => {
+                        e = e || window.event
+                        const target = e.target || e.srcElement
+                        if (target.className === 'close') {
+                            this.ele.style.display = 'none'
+                        }
+                        if (target.className === 'cancel') {
+                            console.log(false)
+                            this.ele.style.display = 'none'
+                            this.callback(false)
+                        }
+                        if (target.className === 'ok') {
+                            console.log(true)
+                            this.ele.style.display = 'none'
+                            this.callback(true)
+                        }
+                    })
+                }
+            }
+            let instance = null
+            return function singleTon(txt, cb){
+                if(!instance) instance = new Tip()
+                instance.setContent(txt)
+                instance.callback = cb || function(){}
+                return instance
+            }
+        })()
+
+        new Tip('赵丹', function a(res){
+            console.log('打印结果', res)
+        })
+    </script>
+</body>
+
+</html>
